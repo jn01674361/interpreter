@@ -22,8 +22,9 @@ func init_workspace() workspace {
 	}
 	return ws
 }
-func declaration(name, val string, ws workspace) {
+func declaration(name, val string, ws workspace) workspace {
 	ws.s[name] = val
+	return ws
 }
 func handle_input(input string, ws workspace) (string, workspace) {
 	var ret string
@@ -35,7 +36,7 @@ func handle_input(input string, ws workspace) (string, workspace) {
 			if len(proposed) > 2{
 				ret = "Bad variable declaration!"
 			} else {
-				declaration(proposed[0], proposed[1], ws)
+				ws = declaration(proposed[0], proposed[1], ws)
 			}
 		default:
 			ret = ws.s[input]
